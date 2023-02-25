@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <!--<link rel="icon" th:href="@{/images/favicon.png}" type="image/gif" />-->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>FutureLib</title>
+
+    <!--<link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css}" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js}" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js}" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js}" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />-->
+
+    <style type="text/css">
+
+        .header {
+            background-color: #f1f1f1;
+            padding: 20px 10px;
+            height: 20px;
+        }
+
+        .header-right{
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .wrapper {
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero{
+            background-color: #ffffff;
+        }
+
+        /* A media query for a large screen */
+        @media (min-width: 1170px) {
+            .wrapper {
+                max-width: 1170px;
+            }
+        }
+
+        @media (orientation: landscape) {
+            .wrapper {
+                flex-direction: row;
+            }
+        }
+
+        /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+        }
+        main {
+            min-height: 100vh;
+            background:#c1d4e0;
+            position: relative;
+            z-index: 1;
+            font: 16px/1.4 system-ui, sans-serif;
+            padding: 2rem;
+            box-shadow: 5px 5px 5px black;
+        }
+
+        .slider_section{
+            background: #c1d4e0;
+        }
+
+        footer {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #252a47;
+            display: grid;
+            padding: 20px;
+            color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">FutureLib</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="active nav-link" href="#">Acasă<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/books}">Cărți</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/authors}">Autori</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categorii
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Aventră</a>
+                    <a class="dropdown-item" href="#">Dragoste</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Copii</a>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Cos</a>
+            </li>
+
+        </ul>
+        <ul>
+        <li class="form-inline my-2 my-lg-0">
+            <a th:href="@{/login}" type="button" class="btn btn-success">Login</a>
+            <a th:href="@{/signup}" type="button" class="btn btn-info">Signup</a>
+        </li>
+        </ul>
+    </div>
+</nav>
+
+    <main>
+<div class="container">
+    <h1>FutureLib</h1>
+</div>
+    <!-- slider section -->
+<!--<section class="hero">
+<div class="d-flex justify-content-center" >
+    <div class="container-fluid">
+        <img th:src="@{/images/cat1.png}" width="100px" src="../static/images/slider-img.png" alt=""/>
+
+    </div>
+    <div class="container-fluid">
+        <img th:src="@{/images/cat2.png}" alt="1" width="100px"/>
+
+    </div>
+    <div class="container-fluid">
+        <img th:src="@{/images/cat3.png}" alt="2" width="100px"/>
+
+    </div>
+</div>
+</section>-->
+   <section class="slider_section">
+        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-box">
+                                    <h5>
+                                        Transport gratuit
+                                    </h5>
+                                    <h1>
+                                        Membrii primesc transport gratuit <br>
+                                    </h1>
+                                    <a href="">
+                                        Mai multe detalii
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="img-box">
+                                    <img src="images/slider-img.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-box">
+                                    <h5>
+                                        O mare diversitate de cărți
+                                    </h5>
+                                    <h1>
+                                        Te așteptăm cu numeroare volume<br>
+                                        din diverse arii de activitate
+                                    </h1>
+                                    <a href="">
+                                        Descoperă
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="img-box">
+                                    <img src="images/b1.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-box">
+                                    <h5>
+                                       Diverse modalități de plată
+                                    </h5>
+                                    <h1>
+                                        Ai dreptul să alegi modalitatea de plată <br>
+                                        cea mai convenabilă ție
+                                    </h1>
+                                    <a href="">
+                                        Vezi mai multe
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="img-box">
+                                    <img src="images/c1.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel_btn_box">
+                <a class="carousel-control-prev" href="#customCarousel1" role="button" data-slide="prev">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#customCarousel1" role="button" data-slide="next">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- end slider section
+</div>-->
+
+        <section style="background-color: #eee;">
+            <div class="text-center container py-5">
+                <h4 class="mt-4 mb-5"><strong>Cele mai vândute</strong></h4>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="card">
+                            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                                 data-mdb-ripple-color="light">
+                                <img src="https://librariadelfin.ro/site_img/products/400/2018/04/poezii---vasile-alecsandri.jpg"
+                                     class="w-100" />
+                                <a href="#!">
+                                    <div class="mask">
+                                        <div class="d-flex justify-content-start align-items-end h-100">
+                                            <h5><span class="badge bg-primary ms-2">Nou</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="hover-overlay">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="" class="text-reset">
+                                    <h5 class="card-title mb-3">Poezii</h5>
+                                </a>
+                                <a href="" class="text-reset">
+                                    <p>Vasile Alecsandri</p>
+                                </a>
+                                <h6 class="mb-3">24.99</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                                 data-mdb-ripple-color="light">
+                                <img src="https://www.libris.ro/img/pozeprod/59/1012/A8/370716.jpg"
+                                     class="w-100" />
+                                <a href="#!">
+                                    <div class="mask">
+                                        <div class="d-flex justify-content-start align-items-end h-100">
+                                            <h5><span class="badge bg-success ms-2"></span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="hover-overlay">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="" class="text-reset">
+                                    <h5 class="card-title mb-3">Amintiri din copilărie</h5>
+                                </a>
+                                <a href="" class="text-reset">
+                                    <p>Ion Creangă</p>
+                                </a>
+                                <h6 class="mb-3">21.99</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light" >
+                                <img src="https://www.libris.ro/img/pozeprod/59/1002/1E/859847.jpg"
+                                     class="w-100" />
+                                <a href="#!">
+                                    <div class="mask">
+                                        <div class="d-flex justify-content-start align-items-end h-100">
+                                            <h5><span class="badge bg-danger ms-2">-10%</span></h5>
+                                        </div>
+                                    </div>
+                                    <div class="hover-overlay">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="" class="text-reset">
+                                    <h5 class="card-title mb-3">Povestea lui Harap Alb</h5>
+                                </a>
+                                <a href="" class="text-reset">
+                                    <p>Ion Creangă</p>
+                                </a>
+                                <h6 class="mb-3">
+                                    <s>41.99</s><strong class="ms-2 text-danger">20.00</strong>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="card">
+                            <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
+                                <img src="https://www.libris.ro/img/pozeprod/59/1002/A8/370747.jpg"
+                                     class="w-100" />
+                                <a href="#!">
+                                    <div class="mask">
+                                        <div class="d-flex justify-content-start align-items-end h-100">
+                                            <h5>
+                                                <span class="badge bg-success ms-2"></span><span
+                                                    class="badge bg-danger ms-2">-10%</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="hover-overlay">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="" class="text-reset">
+                                    <h5 class="card-title mb-3">Enigma Otiliei</h5>
+                                </a>
+                                <a href="" class="text-reset">
+                                    <p>George Călinescu</p>
+                                </a>
+                                <h6 class="mb-3">
+                                    <s>21.99</s><strong class="ms-2 text-danger">20.99</strong>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                                 data-mdb-ripple-color="light">
+                                <img src="https://www.libris.ro/img/pozeprod/59/1012/81/360824.jpg"
+                                     class="w-100" />
+                                <a href="#!">
+                                    <div class="mask">
+                                        <div class="d-flex justify-content-start align-items-end h-100"></div>
+                                    </div>
+                                    <div class="hover-overlay">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="" class="text-reset">
+                                    <h5 class="card-title mb-3">Colț Alb</h5>
+                                </a>
+                                <a href="" class="text-reset">
+                                    <p>Jack London</p>
+                                </a>
+                                <h6 class="mb-3">51.99</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
+                                <img src="https://www.libris.ro/img/pozeprod/59/1002/B1/373089.jpg"
+                                     class="w-100" />
+                                <a href="#!">
+                                    <div class="mask">
+                                        <div class="d-flex justify-content-start align-items-end h-100">
+                                            <h5>
+                                                <span class="badge bg-primary ms-2">Nou</span><span
+                                                    class="badge bg-success ms-2"></span><span class="badge bg-danger ms-2">-10%</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="hover-overlay">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="" class="text-reset">
+                                    <h5 class="card-title mb-3">Hoțul de cărți</h5>
+                                </a>
+                                <a href="" class="text-reset">
+                                    <p>Markus Zusak</p>
+                                </a>
+                                <h6 class="mb-3">
+                                    <s>64.99</s><strong class="ms-2 text-danger">50.99</strong>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<!-- catagory section -->
+
+<section class="catagory_section layout_padding">
+    <div class="catagory_container">
+        <div class="container ">
+            <div class="heading_container heading_center">
+                <h2>
+                    Categorii
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 ">
+                    <div class="box ">
+                        <div class="img-box">
+                            <img src="../static/images/cat1.png" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Cărți de specialitate
+                            </h5>
+                            <p>
+                                La noi găsiți cărți de specialitate din diverse domenii, inclusiv medicină, artă sau știiță
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 ">
+                    <div class="box ">
+                        <div class="img-box">
+                            <img src="../static/images/cat2.png" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Dragoste
+                            </h5>
+                            <p>
+                                Îți dorești să te transpui într-o uimitoare poveste  de dragoste? Pornește în căutarea următoarei călătorii
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 ">
+                    <div class="box ">
+                        <div class="img-box">
+                            <img src="../static/images/cat3.png" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Istorie
+                            </h5>
+                            <p>
+                                Îți dorești să cunoști istoria orașului, țării sau chiar a lumii? Ai unde să te documentezi
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 ">
+                    <div class="box ">
+                        <div class="img-box">
+                            <img src="../static/images/cat4.png" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Biografii
+                            </h5>
+                            <p>
+                               Vrei să știi mai multe despre oamenii care te inspiră?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 ">
+                    <div class="box ">
+                        <div class="img-box">
+                            <img src="../static/images/cat5.png" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Aventură
+                            </h5>
+                            <p>
+                                Pornește în aventură împreună cu noi!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 ">
+                    <div class="box ">
+                        <div class="img-box">
+                            <img src="../static/images/cat6.png" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Fantezie
+                            </h5>
+                            <p>
+                                Pornește în lumea fantastică!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- about section -->
+
+<section class="about_section layout_padding">
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="img-box">
+                    <img src="../images/about-img.png" alt="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="heading_container">
+                        <h2>
+                            Despre librăria noastră
+                        </h2>
+                    </div>
+                    <p>
+                       Ne dorim să aducem în casele dumneavostră cărți bune, greu de găsit în altă parte
+                    </p>
+                    <a href="">
+                        Mai multe detalii
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- end about section -->
+<!-- client section -->
+<section class="client_section layout_padding">
+    <div class="container ">
+        <div class="heading_container heading_center">
+            <h2>
+                Ce spun clienții noștrii?
+            </h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="client_container ">
+                    <div class="detail-box">
+                        <p>La aceată librărie am găsit cărțile de care aveam nevoie la facultate.</p>
+                        <span>
+                <i class="fa fa-quote-left" aria-hidden="true"></i>
+              </span>
+                    </div>
+                    <div class="client_id">
+                        <div class="img-box">
+                            <img src="../images/c1.jpg" alt="">
+                        </div>
+                        <div class="client_name">
+                            <h5>
+                                Ionuț Avraam
+                            </h5>
+                            <h6>
+                                Student
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mx-auto">
+                <div class="client_container ">
+                    <div class="detail-box">
+                        <p>
+                            Am plasat comanda și în 2 zile cărțile au ajuns
+                        </p>
+                        <span>
+                <i class="fa fa-quote-left" aria-hidden="true"></i>
+              </span>
+                    </div>
+                    <div class="client_id">
+                        <div class="img-box">
+                            <img src="../images/c2.jpg" alt="">
+                        </div>
+                        <div class="client_name">
+                            <h5>
+                                Anna Crowe
+                            </h5>
+                            <h6>
+                                Student
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mx-auto">
+                <div class="client_container ">
+                    <div class="detail-box">
+                        <p>
+                          Oferă un suport excepțional pentru clienți
+                        </p>
+                        <span>
+                <i class="fa fa-quote-left" aria-hidden="true"></i>
+              </span>
+                    </div>
+                    <div class="client_id">
+                        <div class="img-box">
+                            <img th:src="@{/images/c3.jpg}" alt="">
+                        </div>
+                        <div class="client_name">
+                            <h5>
+                                James Pop
+                            </h5>
+                            <h6>
+                                Student
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- end client section -->
+
+<!-- jQery -->
+<script th:src="@{js/jquery-3.4.1.min.js}"></script>
+<!-- bootstrap js -->
+<script th:src="@{js/bootstrap.js}"></script>
+<!-- custom js -->
+<script th:src="@{js/custom.js}"></script>
+
+    </main>
+    <footer>
+        <!-- contact section -->
+        <div class="row">
+            <div class="column">
+        <section class="contact_section layout_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="heading_container ">
+                            <h2 class="">
+                                Contact Us
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+                </div>
+        </section>
+        </div></div>
+
+        <!-- end contact section -->
+
+        <!-- info section -->
+            <div class="column">
+        <section class="info_section layout_padding2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 info-col">
+                        <div class="info_detail">
+                            <h4>
+                                Despre noi
+                            </h4>
+                            <p>
+                                Totul a început în 2000
+                            </p>
+                            <div class="info_social">
+                                <a href="">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 info-col">
+                        <div class="info_contact">
+                            <h4>
+                                Adresa
+                            </h4>
+                            <div class="contact_link_box">
+                                <a href="">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    <span>
+                  Locatie
+                </span>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    <span>
+                  0785963288
+                </span>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <span>
+                  demo@gmail.com
+                </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 info-col">
+                        <div class="info_contact">
+                            <h4>
+                                Abonează-te
+                            </h4>
+                            <form action="#">
+                                <input type="text" placeholder="Enter email" />
+                                <button type="submit">
+                                    Subscribe
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 info-col">
+                        <div class="map_container">
+                            <div class="map">
+                                <div id="googleMap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            </div>
+        </div>
+    </footer>
+    <!--END FOOTER-->
+</body>
+</html>
